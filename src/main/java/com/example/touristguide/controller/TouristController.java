@@ -18,6 +18,11 @@ public class TouristController {
 
     @GetMapping("/attractions")
 
+    public String getAllAttractions(Model model){
+
+        return
+    }
+
     @GetMapping("/attractions/{name}")
     public String getAttractionByName(Model model, @PathVariable String attractionName) {
         TouristAttraction attraction = touristService.getAttrationByName(attractionName);
