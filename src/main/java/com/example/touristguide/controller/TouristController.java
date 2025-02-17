@@ -21,13 +21,14 @@ public class TouristController {
     @GetMapping("/attractions")
 
     public String getAllAttractions(Model model){
-        model.addAttribute("attractions",touristService.getAllAttractions());
+        List<TouristAttraction> attractions = touristService.getAllAttractions();
+        model.addAttribute("attractions", attractions);
         return "index";
     }
 
     @GetMapping("/attractions/{name}")
     public String getAttractionByName(Model model, @PathVariable String attractionName) {
-        TouristAttraction attraction = touristService.getAttrationByName(attractionName);
+        TouristAttraction attraction = touristService.getAttractionByName(attractionName);
         model.addAttribute("attraction",attraction);
         return "index";
     }
