@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class TouristController {
     private final TouristService touristService;
@@ -19,13 +21,15 @@ public class TouristController {
     @GetMapping("/attractions")
 
     public String getAllAttractions(Model model){
-
-        return
+        model.addAttribute("attractions",touristService.getAllAttractions());
+        return "index";
     }
 
     @GetMapping("/attractions/{name}")
     public String getAttractionByName(Model model, @PathVariable String attractionName) {
         TouristAttraction attraction = touristService.getAttrationByName(attractionName);
+        model.addAttribute("attraction",attraction);
+        return "index";
     }
 
     @GetMapping("/attractions/{name}/tags")
