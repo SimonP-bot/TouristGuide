@@ -2,6 +2,7 @@ package com.example.touristguide.controller;
 
 import com.example.touristguide.service.TouristService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -14,6 +15,11 @@ public class TouristController {
     }
 
     @GetMapping("/attractions")
+
+    public String getAllAttractions(Model model){
+
+        return
+    }
 
     @GetMapping("/attractions/{name}")
 
