@@ -20,11 +20,10 @@ public class TouristController {
     }
 
     @GetMapping("/attractions")
-
     public String getAllAttractions(Model model){
         List<TouristAttraction> attractions = touristService.getAllAttractions();
         model.addAttribute("attractions", attractions);
-        return "attractionList.html";
+        return "attractionList";
     }
 
     @GetMapping("/attractions/{name}")
