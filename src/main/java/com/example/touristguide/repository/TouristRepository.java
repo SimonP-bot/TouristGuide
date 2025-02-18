@@ -16,15 +16,15 @@ public class TouristRepository {
         myTouristAttrations();
     }
 
-    public void addTouristAttractions(String name, String description) {
-        this.touristAttractions.add(new TouristAttraction(name,description));
+    public void addTouristAttractions(String name, String description, String city) {
+        this.touristAttractions.add(new TouristAttraction(name,description, city));
     }
 
     public void myTouristAttrations() {
-        addTouristAttractions("Eiffeltornet","Tårn midt i Paris. Blev lavet til verdensudstilling i Paris");
-        addTouristAttractions("Den lille havfrue","Skabt af billedhuggeren Edvard Eriksen i 1913");
-        addTouristAttractions("Rosenborg Slot","Kom og se de kongelige smykker");
-        addTouristAttractions("Rundetårn","Udsigtstårn over København");
+        addTouristAttractions("Eiffeltaarnet","Tårn midt i Paris. Blev lavet til verdensudstilling i Paris", "Paris");
+        addTouristAttractions("Den lille havfrue","Skabt af billedhuggeren Edvard Eriksen i 1913", "København");
+        addTouristAttractions("Rosenborg Slot","Kom og se de kongelige smykker", "København");
+        addTouristAttractions("Rundetaarn","Udsigtstårn over København", "København");
     }
 
     public List<TouristAttraction> getAllAttrations() {
