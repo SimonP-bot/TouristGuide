@@ -9,17 +9,26 @@
 </head>
 <body>
 <h1>Turist Attraktioner</h1>
+<button>Tilføj attraktion</button>
 <table>
     <thead>
         <tr>
             <th>Navn</th>
             <th>Beskrivelse</th>
+            <th>By</th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <tr th:each="attraction : ${attractions}">
             <td th:text="${attraction.name}"></td>
             <td th:text="${attraction.description}"></td>
+            <td>By</td>
+            <td><button>Opdater</button></td>
+            <td><button>Slet</button></td>
+            <td><button>Tags</button></td>
         </tr>
     </tbody>
 </table>
