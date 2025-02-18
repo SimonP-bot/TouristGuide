@@ -1,8 +1,12 @@
 package com.example.touristguide.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TouristAttraction {
     private String name;
     private String description;
+    private List<Tags> tags;
 
     public TouristAttraction() {
     }
@@ -10,6 +14,7 @@ public class TouristAttraction {
     public TouristAttraction(String name, String description) {
         this.name = name;
         this.description = description;
+        tags = new ArrayList<>();
     }
 
     // getters
