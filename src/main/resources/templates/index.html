@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turistguiden Velkommen</title>
+    <link rel="stylesheet" th:href="@{css/mystyles.css}">
 </head>
 <body>
+<div class="container">
+    <header>
+        <div>
+            <h1 align="left">Velkommen til VisitZealand</h1>
+            <nav>
+                <ul class="grid-navbar">
+                    <li><a class="white-text" th:href="@{/about}">Om os</a></li>
+                    <li><a class="white-text" th:href="@{/contact}">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section>
+        <h2>Beskrivelse</h2>
+        <p>Er du ligeså glad for <strong>naturen</strong>, som os? Pak bilen og brug vores <strong>guide</strong> med skræddersyede oplevelser til Jeres <strong>eventyrlystne</strong> familie. Vi har
+            samlet de bedste attraktioner, du kan finde, på Sjælland. Vælg mellem de mest populære turistattraktioner eller se hele listen.</p>
 
+    </section>
+    <div class="grid-container">
+        <img class="image-container" src="https://www.campadventure.dk/wp-content/uploads/2022/10/R_Hjortshoj-Camp-Adv-Fall-WEB-4.jpg" alt="skovtårnet næstved">
+        <section>
+            <h2>Populære Turistattraktioner</h2>
+            <ul>
+                <li><a href="https://www.tivoli.dk" target="_blank">Tivoli</a></li>
+                <li><a href="https://www.rundetaarn.dk/" target="_blank">Rundetårn</a></li>
+                <li><a href="https://naturstyrelsen.dk/find-et-naturomraade/naturguider/hovedstaden-og-nordsjaelland/jaegersborg-dyrehave" target="_blank">Jægersborg Dyrehave</a></li>
+                <li><a href="https://www.campadventure.dk/skovtaarnet/" target="_blank">Skovtårnet</a></li>
+                <li><a href="https://naturparkamager.dk/" target="_blank">Amager Naturpark</a></li>
+                <li><a href="https://www.kronborg.dk/" target="_blank">Kronborg Slot</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <section>
+        <h2>Udforsk Vores Data</h2>
+        <ul>
+            <li><a th:href="@{/attractions}">Se alle turistattraktioner</a></li>
+            <li><a th:href="@{/attractions/1}">Se en specifik attraktion (eksempel ID: 1)</a></li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Kontakt os: info@turistguiden.dk | Tlf: +45 1234 5678</p>
+
+    </footer>
+</div>
 </body>
 </html>
