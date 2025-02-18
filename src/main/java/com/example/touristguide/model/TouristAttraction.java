@@ -30,6 +30,9 @@ public class TouristAttraction {
     public String getCity() {
         return this.city;
     }
+    public List<Tags> getTags() {
+        return this.tags;
+    }
 
     // setters
     public void setName(String name) {

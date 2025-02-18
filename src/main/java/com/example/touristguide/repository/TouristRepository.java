@@ -1,5 +1,6 @@
 package com.example.touristguide.repository;
 
+import com.example.touristguide.model.Tags;
 import com.example.touristguide.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 
@@ -74,5 +75,12 @@ public class TouristRepository {
         return false;
     }
 
-
+    public List<Tags> getTags(String attractionName) {
+        for(TouristAttraction i : touristAttractions) {
+            if (attractionName.equalsIgnoreCase(i.getName())) {
+                return i.getTags();
+            }
+        }
+        return null;
+    }
 }
