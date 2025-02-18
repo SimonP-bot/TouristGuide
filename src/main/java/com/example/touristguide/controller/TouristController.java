@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -23,25 +24,36 @@ public class TouristController {
     public String getAllAttractions(Model model){
         List<TouristAttraction> attractions = touristService.getAllAttractions();
         model.addAttribute("attractions", attractions);
-        return "index";
+        return "attractionList.html";
     }
 
     @GetMapping("/attractions/{name}")
     public String getAttractionByName(Model model, @PathVariable String attractionName) {
         TouristAttraction attraction = touristService.getAttractionByName(attractionName);
         model.addAttribute("attraction",attraction);
-        return "index";
+        return "index.html";
     }
 
-    @GetMapping("/attractions/{name}/tags")
+    //@GetMapping("/attractions/{name}/tags")
 
     @GetMapping("/attractions/add")
+    public String addAttraction(Model model, @RequestBody TouristAttraction newAttraction) {
+        model.addAttribute("attraction", touristService.addAttraction(newAttraction));
+        return "index.html";
+    }
 
-    @PostMapping("/attractions/save")
 
-    @GetMapping("/attractions/{name}/edit")
+    //@PostMapping("/attractions/save")
 
-    @PostMapping("/attractions/update")
+    //@GetMapping("/attractions/{name}/edit")
+
+
+    //@PostMapping("/attractions/update")
 
     @PostMapping("attractions/delete/{name}")
+    public String deleteAttraction(Model model, @PathVariable String name) {
+        boolean deletedAttraction = touristService.deleteAttraction(name);
+        model.addAttribute("attraction", deletedAttraction);
+        return "index.html";
+    }
 }
