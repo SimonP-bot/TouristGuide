@@ -4,6 +4,7 @@ public class TouristAttraction {
     private String name;
     private String description;
 
+
     public TouristAttraction() {
     }
 
