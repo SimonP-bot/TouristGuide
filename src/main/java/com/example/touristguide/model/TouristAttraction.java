@@ -7,14 +7,16 @@ public class TouristAttraction {
     private String name;
     private String description;
     private List<Tags> tags;
+    private String city;
 
 
     public TouristAttraction() {
     }
 
-    public TouristAttraction(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public TouristAttraction(String name, String description, String city) {
+        setName(name);
+        setDescription(description);
+        setCity(city);
         tags = new ArrayList<>();
     }
 
@@ -25,8 +27,8 @@ public class TouristAttraction {
     public String getDescription() {
         return this.description;
     }
-    public List<Tags> getTags() {
-        return this.tags;
+    public String getCity() {
+        return this.city;
     }
 
     // setters
@@ -35,6 +37,9 @@ public class TouristAttraction {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+    public void setCity(String city) {
+        this.city = city;
     }
 
     @Override
