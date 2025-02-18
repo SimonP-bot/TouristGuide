@@ -56,4 +56,19 @@ public class TouristController {
         model.addAttribute("attraction", deletedAttraction);
         return "index.html";
     }
+
+    @GetMapping("/")
+    public String home() {
+        return "index";
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
 }
