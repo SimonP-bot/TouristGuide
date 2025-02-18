@@ -25,6 +25,9 @@ public class TouristAttraction {
     public String getDescription() {
         return this.description;
     }
+    public List<Tags> getTags() {
+        return this.tags;
+    }
 
     // setters
     public void setName(String name) {

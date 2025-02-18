@@ -1,5 +1,6 @@
 package com.example.touristguide.controller;
 
+import com.example.touristguide.model.Tags;
 import com.example.touristguide.model.TouristAttraction;
 import com.example.touristguide.service.TouristService;
 import org.springframework.stereotype.Controller;
@@ -30,10 +31,15 @@ public class TouristController {
     public String getAttractionByName(Model model, @PathVariable String attractionName) {
         TouristAttraction attraction = touristService.getAttractionByName(attractionName);
         model.addAttribute("attraction",attraction);
-        return "index.html";
+        return "index";
     }
 
-    //@GetMapping("/attractions/{name}/tags")
+    @GetMapping("/attractions/{name}/tags")
+    public String getTags(Model model, @PathVariable String attractionName) {
+        List<Tags> tags = touristService.getTags(attractionName);
+        model.addAttribute("tags",tags);
+        return "tags";
+    }
 
     @GetMapping("/attractions/add")
     public String addAttraction(Model model, @RequestBody TouristAttraction newAttraction) {
