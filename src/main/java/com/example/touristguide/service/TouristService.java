@@ -33,4 +33,8 @@ public class TouristService {
     public boolean deleteAttraction(String name) {
         return touristRepository.deleteAttraction(name);
     }
+
+    public List<String> getCities() {
+        return touristRepository.myCities();
+    }
 }

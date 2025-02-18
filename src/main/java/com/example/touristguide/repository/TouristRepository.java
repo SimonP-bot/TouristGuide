@@ -73,4 +73,29 @@ public class TouristRepository {
         }
         return false;
     }
+
+    public List<String> myCities() {
+        List<String> cities = new ArrayList<>();
+        cities.add("København");
+        cities.add("Aarhus");
+        cities.add("Odense");
+        cities.add("Aalborg");
+        cities.add("Esbjerg");
+        cities.add("Randers");
+        cities.add("Kolding");
+        cities.add("Horsens");
+        cities.add("Vejle");
+        cities.add("Roskilde");
+        cities.add("Herning");
+        cities.add("Hørsholm");
+        cities.add("Helsingør");
+        cities.add("Silkeborg");
+        cities.add("Næstved");
+        cities.add("Fredericia");
+        cities.add("Ballerup");
+        cities.add("Viborg");
+        cities.add("Køge");
+        cities.add("Holstebro");
+        return cities;
+    }
 }
