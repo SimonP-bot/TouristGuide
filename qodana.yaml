@@ -6,7 +6,6 @@ version: "1.0"
 
 #Specify inspection profile for code analysis
 profile:
-  name: qodana.starter
 
 #Enable inspections
 #include:
@@ -18,7 +17,6 @@ profile:
 #    paths:
 #      - <path/where/not/run/inspection>
 
-projectJDK: 23 #(Applied in CI/CD pipeline)
 
 #Execute shell command before Qodana execution (Applied in CI/CD pipeline)
 #bootstrap: sh ./prepare-qodana.sh

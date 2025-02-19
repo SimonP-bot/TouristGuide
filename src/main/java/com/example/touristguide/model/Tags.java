@@ -8,7 +8,7 @@ public enum Tags {
     KUNST("Kunst"),
     HANDIKAPVENLIGT("Handikapvenligt");
 
-    private String displayName;
+    private final String displayName;
 
     Tags(String displayName) {
         this.displayName = displayName;
