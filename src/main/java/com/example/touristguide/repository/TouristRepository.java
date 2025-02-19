@@ -17,15 +17,17 @@ public class TouristRepository {
         myTouristAttrations();
     }
 
-    public void addTouristAttractions(String name, String description, String city) {
-        this.touristAttractions.add(new TouristAttraction(name,description, city));
+    public void addTouristAttractions(String name, String description, String city, List<Tags> tags) {
+        TouristAttraction attraction = new TouristAttraction(name, description, city);
+        attraction.setTags(tags);
+        this.touristAttractions.add(attraction);
     }
 
     public void myTouristAttrations() {
-        addTouristAttractions("Eiffeltaarnet","Tårn midt i Paris. Blev lavet til verdensudstilling i Paris", "Paris");
-        addTouristAttractions("Den lille havfrue","Skabt af billedhuggeren Edvard Eriksen i 1913", "København");
-        addTouristAttractions("Rosenborg Slot","Kom og se de kongelige smykker", "København");
-        addTouristAttractions("Rundetaarn","Udsigtstårn over København", "København");
+        addTouristAttractions("Eiffeltaarnet","Tårn midt i Paris. Blev lavet til verdensudstilling i Paris", "Paris", List.of(Tags.ART, Tags.CHILD_FRIENDLY, Tags.DISABILITY_FRIENDLY));
+        addTouristAttractions("Den lille havfrue","Skabt af billedhuggeren Edvard Eriksen i 1913", "København", List.of(Tags.FOR_FREE, Tags.ART, Tags.CHILD_FRIENDLY, Tags.DISABILITY_FRIENDLY));
+        addTouristAttractions("Rosenborg Slot","Kom og se de kongelige smykker", "København", List.of(Tags.ART, Tags.MUSEUM, Tags.CHILD_FRIENDLY));
+        addTouristAttractions("Rundetaarn","Udsigtstårn over København", "København", List.of(Tags.CHILD_FRIENDLY));
     }
 
     public List<TouristAttraction> getAllAttrations() {

@@ -1,12 +1,14 @@
 package com.example.touristguide.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum Tags {
-    BØRNEVENLIG("Børnevenlig"),
-    NATUR("Natur"),
-    GRATIS("Gratis"),
+    CHILD_FRIENDLY("Børnevenlig"),
+    NATURE("Natur"),
+    FOR_FREE("Gratis"),
     MUSEUM("Museum"),
-    KUNST("Kunst"),
-    HANDIKAPVENLIGT("Handikapvenligt");
+    ART("Kunst"),
+    DISABILITY_FRIENDLY("Handikapvenligt");
 
     private final String displayName;
 
@@ -17,4 +19,5 @@ public enum Tags {
     public String getDisplayName() {
         return this.displayName;
     }
+
 }

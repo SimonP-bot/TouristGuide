@@ -2,12 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tags</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<h1>tags</h1>
-<ul th:each="tag : ${tags}">
-    <li></li>
-</ul>
+<h1>Tags</h1>
+
+<!--Liste over tags -->
+<ol>
+    <li th:each="tag : ${tags}"  th:text="${tag.displayName}"></li>
+</ol>
+
 </body>
 </html>
