@@ -28,6 +28,13 @@
             <td>By</td>
             <td><a class="edit-link" th:href="@{/attractions/{name}/edit(name=${attraction.name})}">Opdater</a></td>
             <td><button>Slet</button></td>
+            <td>
+                <form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post">
+                    <button type="submit" class="btn btn-danger">Slet</button>
+                </form>
+            </td>
+
+
             <td><button>Tags</button></td>
         </tr>
     </tbody>
