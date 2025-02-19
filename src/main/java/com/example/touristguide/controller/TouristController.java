@@ -42,7 +42,7 @@ public class TouristController {
     @GetMapping("/attractions/add")
     public String addAttraction(Model model, @RequestBody TouristAttraction newAttraction) {
         model.addAttribute("attraction", touristService.addAttraction(newAttraction));
-        return "index";
+        return "redirect:/attractionList";
     }
 
 
