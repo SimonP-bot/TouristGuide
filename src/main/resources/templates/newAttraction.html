@@ -3,10 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ny Attraktion</title>
+    <title>Tilføj Attraktion</title>
     <link rel="stylesheet" th:href="@{css/styles.css}">
 </head>
 <body>
 
+<h1>Tilføj Ny Attraktion</h1>
+
+
+<form th:action="@{/attractions/add}" th:object="${attraction}" method="post">
+
+<!-- Navn -->
+    <label for="name">Navn:</label>
+    <input type="text" id="name" name="name" th:field="*{name}" required>
+    <br><br>
+<!-- Beskrivelse -->
+    <label for="description">Beskrivelse:</label>
+    <input type="text" id="description" name="description" th:field="*{description}" required>
+    <br><br>
+
+<!-- Byer i drop-down menu-->
+    <label for="city">By:</label>
+    <select id="city" name="city" th:field="*{city}">
+        <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+    </select>
+    <br><br>
+
+<!-- Vælg mellem flere tags-->
+    <label>Vælg Tags:</label>
+    <br>
+    <th:block th:each="tag : ${tags}">
+        <input type="checkbox" th:name="tags" th:value="${tag}" th:text="${tag.displayName}">
+    </th:block>
+    <br><br>
+
+    <button type="submit">OK</button>
+
+</form>
 </body>
 </html>
