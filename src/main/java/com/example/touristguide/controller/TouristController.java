@@ -44,7 +44,7 @@ public class TouristController {
     @GetMapping("/attractions/add")
     public String addAttraction(Model model, @RequestBody TouristAttraction newAttraction) {
         model.addAttribute("attraction", touristService.addAttraction(newAttraction));
-        return "index.html";
+        return "index";
     }
 
 
@@ -59,7 +59,7 @@ public class TouristController {
     public String deleteAttraction(Model model, @PathVariable String name) {
         boolean deletedAttraction = touristService.deleteAttraction(name);
         model.addAttribute("attraction", deletedAttraction);
-        return "index.html";
+        return "index";
     }
 
     @GetMapping("/")
