@@ -35,8 +35,8 @@ public class TouristService {
         return touristRepository.deleteAttraction(name);
     }
 
-    public List<Tags> getTags(String attractionName) {
-        return touristRepository.getTags(attractionName);
+    public List<Tags> getTags(String name) {
+        return touristRepository.getTags(name);
     }
 
     public List<String> getCities() {
