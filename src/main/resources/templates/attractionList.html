@@ -27,7 +27,13 @@
             <td th:text="${attraction.description}"></td>
             <td>By</td>
             <td><button>Opdater</button></td>
-            <td><button th:href="@{attractions/delete/{name}(name=${attraction.name})}">Slet</button></td>
+            <td>
+                <form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post">
+                    <button type="submit" class="btn btn-danger">Slet</button>
+                </form>
+            </td>
+
+
             <td><button>Tags</button></td>
         </tr>
     </tbody>

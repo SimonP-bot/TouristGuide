@@ -55,7 +55,7 @@ public class TouristController {
 
     //@PostMapping("/attractions/update")
 
-    @PostMapping("attractions/delete/{name}")
+    @PostMapping("/attractions/delete/{name}")
     public String deleteAttraction(Model model, @PathVariable String name) {
         boolean deletedAttraction = touristService.deleteAttraction(name);
         model.addAttribute("attraction", deletedAttraction);
