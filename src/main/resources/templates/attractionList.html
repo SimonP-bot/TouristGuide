@@ -27,7 +27,7 @@
             <td th:text="${attraction.description}"></td>
             <td>By</td>
             <td><button>Opdater</button></td>
-            <td><button>Slet</button></td>
+            <td><button th:href="@{attractions/delete/{name}(name=${attraction.name})}">Slet</button></td>
             <td><button>Tags</button></td>
         </tr>
     </tbody>
