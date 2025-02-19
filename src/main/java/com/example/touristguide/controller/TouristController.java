@@ -5,11 +5,9 @@ import com.example.touristguide.model.TouristAttraction;
 import com.example.touristguide.service.TouristService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.HTML;
 import java.util.List;
 
 @Controller
@@ -50,10 +48,25 @@ public class TouristController {
 
     //@PostMapping("/attractions/save")
 
-    //@GetMapping("/attractions/{name}/edit")
+    @GetMapping("/attractions/{name}/edit")
+    public String editAttraction(Model model, @PathVariable String name) {
+        TouristAttraction touristAttraction = touristService.getAttractionByName(name);
+        if(touristAttraction == null) {
+            throw new IllegalArgumentException("Ugyldigt attraktion");
+        }
+        model.addAttribute("attraction",touristAttraction);
+        model.addAttribute("attractionName", touristAttraction.getName());
+        model.addAttribute("attractionDescription",touristAttraction.getDescription());
+        model.addAttribute("tags", Tags.values());
+        model.addAttribute("cities",touristService.getCities());
+        return "updateAttraction";
+    }
 
-
-    //@PostMapping("/attractions/update")
+    @PostMapping("/attractions/update")
+    public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
+        touristService.updateAttraction(attraction);
+        return "redirect:/attractions";
+    }
 
     @PostMapping("attractions/delete/{name}")
     public String deleteAttraction(Model model, @PathVariable String name) {

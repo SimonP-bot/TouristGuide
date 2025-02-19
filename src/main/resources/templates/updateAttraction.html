@@ -2,9 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Attraction Form</title>
+    <title>Opdater Attraktion</title>
 </head>
 <body>
+<form th:action="@{/attractions/update}" th:object="${attraction}" method="post">
+    <input type="hidden" th:field="*{name}">
 
+    <h2 th:text="'Opdater ' + ${name}"></h2>
+    <br>
+
+    <label for="description">Beskrivelse</label>
+    <textarea name="description" id="description" cols="30" rows="5" th:field="*{description}" required></textarea>
+    <br><br>
+
+    <label for="city">By</label>
+    <select name="city" id="city" th:field="*{city}">
+        <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+    </select>
+    <br><br>
+
+    <label>Tags</label><br>
+    <div th:each="tag : ${tags}">
+        <input type="checkbox" th:value="${tag}" th:field="*{tags}">
+        <label th:text="${tag.displayName}"></label><br>
+    </div>
+    <br>
+
+    <button type="submit">Opdater Attraktion</button>
+</form>
 </body>
 </html>

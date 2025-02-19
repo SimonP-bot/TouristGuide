@@ -48,16 +48,13 @@ public class TouristRepository {
         return touristAttraction;
     }
 
-    public TouristAttraction updateAttraction(String name, TouristAttraction updatedAttraction) {
+    public TouristAttraction updateAttraction(TouristAttraction updatedAttraction) {
         for (TouristAttraction attraction : touristAttractions) {
-            if (attraction.getName().equalsIgnoreCase(name)) {
-                if (updatedAttraction.getDescription() != null) {
-                    attraction.setDescription(updatedAttraction.getDescription());
-                }
-                if (updatedAttraction.getName() != null) {
-                    attraction.setName(updatedAttraction.getName());
-                }
-                return attraction;
+            if(attraction.getName().equalsIgnoreCase(updatedAttraction.getName())) {
+                attraction.setDescription(updatedAttraction.getDescription());
+                attraction.setCity(updatedAttraction.getCity());
+                attraction.setTags(updatedAttraction.getTags());
+                return updatedAttraction;
             }
         }
         return null;
