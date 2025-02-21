@@ -59,7 +59,7 @@ public class TouristController {
             attraction.setTags(new ArrayList<>()); //Ingen tags = tom liste (undgår NullPointerException)
         }
         touristService.addAttraction(attraction);
-        return "redirect:/attractionList"; // Omdirigerer til listen over attraktioner
+        return "redirect:/attractions"; // Omdirigerer til listen over attraktioner
     }
 
     @GetMapping("/attractions/{name}/edit")
