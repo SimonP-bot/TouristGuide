@@ -10,8 +10,8 @@
 <h1>Tags</h1>
 
 <!--Liste over tags -->
-<ol>
-    <li th:each="tag : ${tags}"  th:text="${tag.displayName}"></li>
+<ol th:each="tag : ${tags}">
+    <li th:text="${tag.displayName}"></li>
 </ol>
 
 </body>
