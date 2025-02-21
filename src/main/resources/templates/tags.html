@@ -7,12 +7,13 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<h1>Tags</h1>
+<h1>Alle Tags</h1>
 
 <!--Liste over tags -->
-<ol th:each="tag : ${tags}">
+
+<ul th:each="tag : ${tags}">
     <li th:text="${tag.displayName}"></li>
-</ol>
+</ul>
 
 </body>
 </html>

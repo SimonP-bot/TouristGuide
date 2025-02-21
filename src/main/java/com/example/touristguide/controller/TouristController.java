@@ -86,7 +86,7 @@ public class TouristController {
     public String deleteAttraction(Model model, @PathVariable String name) {
         boolean deletedAttraction = touristService.deleteAttraction(name);
         model.addAttribute("attraction", deletedAttraction);
-        return "index";
+        return "redirect:/attractions";
     }
 
     @GetMapping("/")
