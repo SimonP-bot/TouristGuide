@@ -1,21 +1,10 @@
-.delete-button {
-    background-color: red;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
 .grid-navbar {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 100px 100px;
     gap: 20px;
     max-width: 900px;
     -ms-grid-column-align: initial;
@@ -167,6 +156,17 @@ footer {
     a {
         font-size: 16px;
     }
+
+}
+button.delete-button {
+    background-color: #ff00a7;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
 
 
