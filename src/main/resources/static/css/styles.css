@@ -97,10 +97,11 @@ ul li {
 
 a {
     text-decoration: none;
-    color: #007bff;
+    color: white;
     font-weight: 600;
     font-size: 18px;
     transition: 0.3s;
+    margin-bottom: 20px;
 }
 
 a:hover {
