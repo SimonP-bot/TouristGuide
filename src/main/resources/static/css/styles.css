@@ -125,6 +125,11 @@ button:hover {
     box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }
 
+button:active{
+    transform: translateY(0);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
 footer {
     background-color: #333;
     color: white;
