@@ -109,7 +109,7 @@ a:hover {
 }
 
 button {
-    background: #007bff;
+    background: linear-gradient(135deg, #007bff, #0056b3);
     color: white;
     border: none;
     padding: 12px 20px;
