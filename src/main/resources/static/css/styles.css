@@ -22,8 +22,8 @@ table, th, td {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 350px;
-    max-height: 250px;
+    max-width: 516px;
+    max-height: 516px;
     overflow: hidden;
 }
 .image-container img {
