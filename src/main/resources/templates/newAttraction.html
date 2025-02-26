@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tilføj Attraktion</title>
-    <link rel="stylesheet" th:href="@{css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 
@@ -33,7 +33,9 @@
     <label>Vælg Tags:</label>
     <br>
     <th:block th:each="tag : ${tags}">
-        <input type="checkbox" th:name="tags" th:value="${tag}" th:text="${tag.displayName}">
+        <label>
+            <input type="checkbox" th:name="tags" th:value="${tag}" th:text="${tag.displayName}">
+        </label>
     </th:block>
     <br><br>
 

@@ -2,7 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opdater Attraktion</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 <form th:action="@{/attractions/update}" th:object="${attraction}" method="post">
@@ -23,12 +25,15 @@
 
     <label>Tags</label><br>
     <div th:each="tag : ${tags}">
-        <input type="checkbox" th:value="${tag}" th:field="*{tags}">
+        <label>
+            <input type="checkbox" th:value="${tag}" th:field="*{tags}">
+        </label>
         <label th:text="${tag.displayName}"></label><br>
     </div>
     <br>
 
     <button type="submit">Opdater Attraktion</button>
 </form>
+<a th:href="@{/attractions}" class="delete-button">Annuller</a>
 </body>
 </html>
