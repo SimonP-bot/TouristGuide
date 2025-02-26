@@ -8,9 +8,10 @@
 </head>
 <body>
 <h1>Turist Attraktioner</h1>
-<button class="add-button">
-    <a class="add" th:href="@{/attractions/add}"> Tilføj attraktion</a>
-</button>
+    <a th:href="@{/attractions/add}">
+        <button type="button" class="back-button">Tilføj Attraktion</button>
+    </a>
+<br><br>
 <table>
     <thead>
         <tr>

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.HTML;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +46,6 @@ public class TouristController {
         model.addAttribute("tags", Tags.values()); //Henter tags-værdier
         return "newAttraction"; //Viser html <form>
     }
-
-
-    //@PostMapping("/attractions/save")
 
     @PostMapping("/attractions/save")
     public String saveAttraction(@ModelAttribute TouristAttraction attraction, @RequestParam(required = false) List<Tags> tags) {
