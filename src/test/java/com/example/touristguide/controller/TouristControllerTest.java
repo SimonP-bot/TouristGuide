@@ -15,6 +15,7 @@ import java.awt.*;
 import java.util.Arrays;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -22,14 +23,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(TouristController.class)
 class TouristGuideApplicationTests {
 
+
+
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc mockMvc; //Simulerer requests vha objekt til simuleringen
 
     @MockitoBean
-    private TouristService touristService;
+    private TouristService touristService; //Bean-objekt i stedet for objekt af @Service
 
     @BeforeEach
     void setUp() {
+
+
 
     }
 
@@ -43,6 +48,27 @@ class TouristGuideApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(view().name("attractionList"));
     }
+    /*
+
+    @Test
+    void updateAttractionTest() throws Exception {
+        TouristAttraction attraction = new TouristAttraction("Pyramiderne", "sten", "Odense");
+                attraction.setTags(java.util.List.of(Tags.CHILD_FRIENDLY));
+
+                when(touristService.updateAttraction(attraction)).thenReturn(attraction);
+        mockMvc.perform(post("/attractions/update")
+                .queryParam("tags", "CHILD_FRIENDLY")
+
+    }
+
+    @Test
+    void addAttractionTest() throws Exception {
+        TouristAttraction attraction = new TouristAttraction("Pyramiderne", "sten", "Odense");
+        attraction.setTags(java.util.List.of(Tags.CHILD_FRIENDLY, Tags.ART));
+        mockMvc.perform(get("/attractions/add"))
+                .andExpect(status().isOk()).andExpect(view().n)
+    }
+    */
 
 
 
