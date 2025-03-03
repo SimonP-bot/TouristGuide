@@ -10,7 +10,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
+import static org.mockito.ArgumentMatchers.argThat;
+
 import static org.mockito.Mockito.when;
+import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -99,7 +105,33 @@ class TouristGuideApplicationTests {
                 .andExpect(model().attribute("cities", cities)) // Sikre at cities er mock-værdierne
                 .andExpect(model().attribute("tags", Tags.values())); // Sikre at tags er enum-værdierne
     }
-    /*
+
+    @Test
+    void testSaveAttraction() throws Exception {
+        //Arrange
+        TouristAttraction touristAttraction = new TouristAttraction("Eremitageslottet", "Jagtslot", "Klampenborg");
+        List<Tags> tags = Arrays.asList(Tags.FOR_FREE, Tags.CHILD_FRIENDLY);
+        touristAttraction.setTags(tags);
+
+        // Act & Assert
+        mockMvc.perform(post("/attractions/save")
+                        .param("name", touristAttraction.getName()) // Brug .param() til at sende form-data
+                        .param("description", touristAttraction.getDescription())
+                        .param("city", touristAttraction.getCity())
+                        .param("tags", "FOR_FREE", "CHILD_FRIENDLY")) // Sender tags korrekt
+                .andExpect(status().is3xxRedirection()) // Forventer redirect
+                .andExpect(redirectedUrl("/attractions")); // Omdirigering til '/attractions'
+
+
+        // Skal sikre at service-metoden kaldes korrekt med det oprettede objekt
+        verify(touristService, times(1)).addAttraction(argThat(a ->
+                a.getName().equals(touristAttraction.getName()) &&
+                a.getDescription().equals(touristAttraction.getDescription()) &&
+                a.getCity().equals(touristAttraction.getCity()) &&
+                a.getTags().containsAll(tags)));
+
+    }
+/*
 
     @Test
     void updateAttractionTest() throws Exception {
