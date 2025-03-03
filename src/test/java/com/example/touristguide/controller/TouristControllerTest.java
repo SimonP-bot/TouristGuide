@@ -43,7 +43,7 @@ class TouristGuideApplicationTests {
     void tearDown() {
     }
 
-    @Test //Viser alle attraktioner
+    @Test // Viser alle attraktioner
     void testShowTouristAttractions() throws Exception {
         when(touristService.getAllAttractions())
                 .thenReturn(List.of(new TouristAttraction("Eremitageslottet", "Jagtslot", "Klampenborg"),
@@ -55,7 +55,7 @@ class TouristGuideApplicationTests {
                 .andExpect(model().attributeExists("attractions"));
     }
 
-    @Test //Finder attraktion ud fra navn
+    @Test // Finder attraktion ud fra navn
     void testGetAttractionByName() throws Exception {
         TouristAttraction touristAttraction = new TouristAttraction("Eremitageslottet", "Jagtslot", "Klampenborg");
 
@@ -67,7 +67,7 @@ class TouristGuideApplicationTests {
                 .andExpect(model().attributeExists("attraction"));
     }
 
-    @Test //Viser tags for en attraktion
+    @Test // Viser tags for en attraktion
     void testGetTags() throws Exception {
         List<Tags> tags = Arrays.asList(Tags.CHILD_FRIENDLY, Tags.FOR_FREE);
 
@@ -78,6 +78,26 @@ class TouristGuideApplicationTests {
                 .andExpect(view().name("tags"))
                 .andExpect(model().attributeExists("tags"));
 
+    }
+
+    @Test // Tilføjer attraktion til liste
+    void testAddAttraction() throws Exception {
+
+        //Arrange
+        List<String> cities = Arrays.asList("Klampenborg", "Lyngby", "Kalundborg");
+
+        when(touristService.getCities()).thenReturn(cities);
+
+
+        //Act & Assert
+        mockMvc.perform(get("/attractions/add")) //Forventer nedenstående
+                .andExpect(status().isOk()) // Status 200
+                .andExpect(view().name("newAttraction"))
+                .andExpect(model().attributeExists("attraction")) // Tom 'attraction'
+                .andExpect(model().attributeExists("cities")) // Cities tilføjet til model
+                .andExpect(model().attributeExists("tags")) // Tags tilføjet til model
+                .andExpect(model().attribute("cities", cities)) // Sikre at cities er mock-værdierne
+                .andExpect(model().attribute("tags", Tags.values())); // Sikre at tags er enum-værdierne
     }
     /*
 
