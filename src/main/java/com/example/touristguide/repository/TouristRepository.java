@@ -30,7 +30,7 @@ public class TouristRepository {
         addTouristAttractions("Rundetaarn","Udsigtstårn over København", "København", List.of(Tags.CHILD_FRIENDLY));
     }
 
-    public List<TouristAttraction> getAllAttrations() {
+    public List<TouristAttraction> getAllAttractions() {
         return touristAttractions;
     }
 

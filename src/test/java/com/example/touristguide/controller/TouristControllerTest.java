@@ -4,20 +4,26 @@ import com.example.touristguide.model.TouristAttraction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 
 import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
-import static org.mockito.ArgumentMatchers.argThat;
 
-import static org.mockito.Mockito.when;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
+
+
+
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -155,8 +161,30 @@ class TouristGuideApplicationTests {
 
     @Test
     void testUpdateAttraction() throws Exception {
-        TouristAttraction touristAttraction = new TouristAttraction("Eremitageslottet", "Jagtslot", "Klampenborg");
-        
+        TouristAttraction touristAttraction = new TouristAttraction("Eiffeltaarnet","Tårn midt i Paris. Blev lavet til verdensudstilling i Paris", "Paris");
+        List<Tags> tags = Arrays.asList(Tags.ART, Tags.CHILD_FRIENDLY, Tags.DISABILITY_FRIENDLY);
+        touristAttraction.setTags(tags);
+
+        when(touristService.getAttractionByName("Eiffeltaarnet")).thenReturn(touristAttraction);
+
+        TouristAttraction updatedTouristAttraction = new TouristAttraction("Eiffeltaarnet", "Opdateret", "Klampenborg");
+        updatedTouristAttraction.setTags(Arrays.asList(Tags.CHILD_FRIENDLY, Tags.FOR_FREE));
+
+        //Mock'er updateAttraction() til at returnere den opdaterede attraktion
+        when(touristService.updateAttraction(any(TouristAttraction.class))).thenReturn(updatedTouristAttraction);
+
+        //Act - Simulerer post-request med opdaterede værdier
+        mockMvc.perform(post("/attractions/update")
+                        .flashAttr("attraction", touristAttraction) //@ModelAttribute binder sig til objekt vha flashAttr()
+                        //Simulerer hvordan <form> sender data i Spring MVC
+                        .param("tags", "FOR_FREE", "CHILD_FRIENDLY")) //Tags sendes som requestParam
+                .andExpect(status().is3xxRedirection()) //Forventer redirect
+                .andExpect(redirectedUrl("/attractions")); //Selve omdirigeringen
+
+
+
+
+
     }
 
 
