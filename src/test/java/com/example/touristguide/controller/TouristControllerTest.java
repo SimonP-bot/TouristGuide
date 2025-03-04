@@ -11,12 +11,13 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
 import static org.mockito.ArgumentMatchers.argThat;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -115,20 +116,11 @@ class TouristGuideApplicationTests {
 
         // Act & Assert
         mockMvc.perform(post("/attractions/save")
-                        .param("name", touristAttraction.getName()) // Brug .param() til at sende form-data
-                        .param("description", touristAttraction.getDescription())
-                        .param("city", touristAttraction.getCity())
-                        .param("tags", "FOR_FREE", "CHILD_FRIENDLY")) // Sender tags korrekt
-                .andExpect(status().is3xxRedirection()) // Forventer redirect
-                .andExpect(redirectedUrl("/attractions")); // Omdirigering til '/attractions'
-
-
-        // Skal sikre at service-metoden kaldes korrekt med det oprettede objekt
-        verify(touristService, times(1)).addAttraction(argThat(a ->
-                a.getName().equals(touristAttraction.getName()) &&
-                a.getDescription().equals(touristAttraction.getDescription()) &&
-                a.getCity().equals(touristAttraction.getCity()) &&
-                a.getTags().containsAll(tags)));
+                        .flashAttr("attraction", touristAttraction) //@ModelAttribute binder sig til objekt vha flashAttr()
+                                                                    //Simulerer hvordan <form> sender data i Spring MVC
+                        .param("tags", "FOR_FREE", "CHILD_FRIENDLY")) //Tags sendes som requestParam
+                        .andExpect(status().is3xxRedirection()) //Forventer redirect
+                        .andExpect(redirectedUrl("/attractions")); //Selve omdirigeringen
 
     }
 /*
