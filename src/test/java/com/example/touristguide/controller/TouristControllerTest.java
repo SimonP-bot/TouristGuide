@@ -153,6 +153,12 @@ class TouristGuideApplicationTests {
 
     }
 
+    @Test
+    void testUpdateAttraction() throws Exception {
+        TouristAttraction touristAttraction = new TouristAttraction("Eremitageslottet", "Jagtslot", "Klampenborg");
+        
+    }
+
 
 /*
 
