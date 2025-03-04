@@ -11,6 +11,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 
+import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
@@ -123,6 +124,36 @@ class TouristGuideApplicationTests {
                         .andExpect(redirectedUrl("/attractions")); //Selve omdirigeringen
 
     }
+
+    @Test
+    void testEditAttraction() throws Exception {
+        TouristAttraction touristAttraction = new TouristAttraction("Eremitageslottet", "Jagtslot", "Klampenborg");
+        List<Tags> tags = Arrays.asList(Tags.FOR_FREE, Tags.CHILD_FRIENDLY);
+        touristAttraction.setTags(tags);
+
+        when(touristService.getAttractionByName("Eremitageslottet")).thenReturn(touristAttraction);
+        when(touristService.getCities()).thenReturn(Arrays.asList("Klampenborg", "Lyngby"));
+
+
+        mockMvc.perform(get("/attractions/{name}/edit", "Eremitageslottet"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("updateAttraction"))
+                .andExpect(model().attribute("attraction", touristAttraction))
+                .andExpect(model().attribute("attractionName", touristAttraction.getName()))
+                .andExpect(model().attribute("attractionDescription", touristAttraction.getDescription()))
+                .andExpect(model().attributeExists("tags"))
+                .andExpect(model().attribute("tags", arrayContainingInAnyOrder(Tags.values()))) //Sikrer at Tags.values()
+                                                                                    //returnerer samme værdier som modellen indeholder
+                .andExpect(model().attributeExists("cities"));
+
+        verify(touristService, times(1)).getAttractionByName("Eremitageslottet");
+        verify(touristService, times(1)).getCities();
+
+
+
+    }
+
+
 /*
 
     @Test
