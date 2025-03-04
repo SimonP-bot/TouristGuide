@@ -128,7 +128,6 @@ class TouristGuideApplicationTests {
                         .param("tags", "FOR_FREE", "CHILD_FRIENDLY")) //Tags sendes som requestParam
                         .andExpect(status().is3xxRedirection()) //Forventer redirect
                         .andExpect(redirectedUrl("/attractions")); //Selve omdirigeringen
-
     }
 
     @Test
@@ -155,8 +154,6 @@ class TouristGuideApplicationTests {
         verify(touristService, times(1)).getAttractionByName("Eremitageslottet");
         verify(touristService, times(1)).getCities();
 
-
-
     }
 
     @Test
@@ -181,34 +178,29 @@ class TouristGuideApplicationTests {
                 .andExpect(status().is3xxRedirection()) //Forventer redirect
                 .andExpect(redirectedUrl("/attractions")); //Selve omdirigeringen
 
-
-
-
-
-    }
-
-
-/*
-
-    @Test
-    void updateAttractionTest() throws Exception {
-        TouristAttraction attraction = new TouristAttraction("Pyramiderne", "sten", "Odense");
-                attraction.setTags(java.util.List.of(Tags.CHILD_FRIENDLY));
-
-                when(touristService.updateAttraction(attraction)).thenReturn(attraction);
-        mockMvc.perform(post("/attractions/update")
-                .queryParam("tags", "CHILD_FRIENDLY")
-
     }
 
     @Test
-    void addAttractionTest() throws Exception {
-        TouristAttraction attraction = new TouristAttraction("Pyramiderne", "sten", "Odense");
-        attraction.setTags(java.util.List.of(Tags.CHILD_FRIENDLY, Tags.ART));
-        mockMvc.perform(get("/attractions/add"))
-                .andExpect(status().isOk()).andExpect(view().n)
+    void testDeleteAttraction() throws Exception {
+        TouristAttraction touristAttraction = new TouristAttraction("Eiffeltaarnet", "Tårn midt i Paris. Blev lavet til verdensudstilling i Paris", "Paris");
+        List<Tags> tags = Arrays.asList(Tags.ART, Tags.CHILD_FRIENDLY, Tags.DISABILITY_FRIENDLY);
+        touristAttraction.setTags(tags);
+
+        when(touristService.deleteAttraction(touristAttraction.getName())).thenReturn(true);
+
+        mockMvc.perform(post("/attractions/delete/{name}", "Eiffeltaarnet"))
+                .andExpect(status().is3xxRedirection()) // Forventer en redirect
+                .andExpect(redirectedUrl("/attractions"));
+
+        verify(touristService, times(1)).deleteAttraction("Eiffeltaarnet");
+
+
     }
-    */
+
+
+
+
+
 
 
 
