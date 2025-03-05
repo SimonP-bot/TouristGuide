@@ -164,7 +164,7 @@ class TouristGuideApplicationTests {
 
         when(touristService.getAttractionByName("Eiffeltaarnet")).thenReturn(touristAttraction);
 
-        TouristAttraction updatedTouristAttraction = new TouristAttraction("Eiffeltaarnet", "Opdateret", "Klampenborg");
+        TouristAttraction updatedTouristAttraction = new TouristAttraction("Eiffeltaarnet", "Opdateret", "Paris");
         updatedTouristAttraction.setTags(Arrays.asList(Tags.CHILD_FRIENDLY, Tags.FOR_FREE));
 
         //Mock'er updateAttraction() til at returnere den opdaterede attraktion
