@@ -74,13 +74,20 @@ public class TouristController {
     }
 
     @PostMapping("/attractions/update")
-    public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
+    public String updateAttraction(@ModelAttribute TouristAttraction attraction,  @RequestParam(required = false) List<Tags> tags) {
+
+        if (tags != null) {
+            attraction.setTags(tags);
+        } else {
+            attraction.setTags(new ArrayList<>()); //Ingen tags = tom liste (undgår NullPointerException)
+        }
         touristService.updateAttraction(attraction);
         return "redirect:/attractions";
     }
 
     @PostMapping("/attractions/delete/{name}")
     public String deleteAttraction(Model model, @PathVariable String name) {
+
         boolean deletedAttraction = touristService.deleteAttraction(name);
         model.addAttribute("attraction", deletedAttraction);
         return "redirect:/attractions";
