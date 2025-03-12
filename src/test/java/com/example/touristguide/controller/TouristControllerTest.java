@@ -19,6 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
 
 
 
@@ -164,7 +165,8 @@ class TouristGuideApplicationTests {
 
         when(touristService.getAttractionByName("Eiffeltaarnet")).thenReturn(touristAttraction);
 
-        TouristAttraction updatedTouristAttraction = new TouristAttraction("Eiffeltaarnet", "Opdateret", "Paris");
+        String updatedDescription = "Opdateret";
+        TouristAttraction updatedTouristAttraction = new TouristAttraction("Eiffeltaarnet", updatedDescription, "Paris");
         updatedTouristAttraction.setTags(Arrays.asList(Tags.CHILD_FRIENDLY, Tags.FOR_FREE));
 
         //Mock'er updateAttraction() til at returnere den opdaterede attraktion
@@ -177,6 +179,8 @@ class TouristGuideApplicationTests {
                         .param("tags", "FOR_FREE", "CHILD_FRIENDLY")) //Tags sendes som requestParam
                 .andExpect(status().is3xxRedirection()) //Forventer redirect
                 .andExpect(redirectedUrl("/attractions")); //Selve omdirigeringen
+
+        verify(touristService, times(1)).updateAttraction(any(TouristAttraction.class));
 
     }
 
