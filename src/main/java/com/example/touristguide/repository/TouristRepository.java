@@ -24,7 +24,7 @@ public class TouristRepository {
     }
 
     public void myTouristAttractions() {
-        addTouristAttractions("Eiffeltaarnet","Tårn midt i Paris. Blev lavet til verdensudstilling i Paris", "Paris", List.of(Tags.ART, Tags.CHILD_FRIENDLY, Tags.DISABILITY_FRIENDLY));
+        addTouristAttractions("Eiffeltaarnet","Tårn midt i Paris. Blev lavet til verdensudstilling i Paris", "Pari", List.of(Tags.ART, Tags.CHILD_FRIENDLY, Tags.DISABILITY_FRIENDLY));
         addTouristAttractions("Den lille havfrue","Skabt af billedhuggeren Edvard Eriksen i 1913", "København", List.of(Tags.FOR_FREE, Tags.ART, Tags.CHILD_FRIENDLY, Tags.DISABILITY_FRIENDLY));
         addTouristAttractions("Rosenborg Slot","Kom og se de kongelige smykker", "København", List.of(Tags.ART, Tags.MUSEUM, Tags.CHILD_FRIENDLY));
         addTouristAttractions("Rundetaarn","Udsigtstårn over København", "København", List.of(Tags.CHILD_FRIENDLY));
