@@ -105,6 +105,7 @@ public class TouristRepository {
         cities.add("Viborg");
         cities.add("Køge");
         cities.add("Holstebro");
+        cities.add("Højby");
 
         return cities;
 
