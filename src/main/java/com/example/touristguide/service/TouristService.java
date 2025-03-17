@@ -1,6 +1,7 @@
 package com.example.touristguide.service;
 
-import com.example.touristguide.model.Tags;
+import com.example.touristguide.model.City;
+import com.example.touristguide.model.Tag;
 import com.example.touristguide.model.TouristAttraction;
 import com.example.touristguide.repository.TouristRepository;
 import org.springframework.stereotype.Service;
@@ -23,23 +24,37 @@ public class TouristService {
             return touristRepository.getAttractionByName(name);
         }
 
-        public TouristAttraction addAttraction(TouristAttraction touristAttraction) {
-            return touristRepository.addAttraction(touristAttraction);
+    public void addAttraction(TouristAttraction attraction, List<Integer> tagIds) {
+        touristRepository.addAttraction(attraction);
+        if (tagIds != null && !tagIds.isEmpty()) {
+            touristRepository.addTagsToAttraction(attraction.getId(), tagIds);
+        }
+    }
+
+        public void updateAttraction(TouristAttraction attraction, List<Integer> tagIds) {
+            touristRepository.updateAttraction(attraction);
+            if (tagIds != null) {
+            touristRepository.updateAttractionTags(attraction.getId(), tagIds);
+            }
         }
 
-        public TouristAttraction updateAttraction(TouristAttraction updatedAttraction) {
-            return touristRepository.updateAttraction(updatedAttraction);
+        public boolean deleteAttraction(int attractionId) {
+            return touristRepository.deleteAttraction(attractionId);
         }
 
-        public boolean deleteAttraction(String name) {
-            return touristRepository.deleteAttraction(name);
+        public List<City> getCities() {
+            return touristRepository.getCities();
         }
 
-        public List<Tags> getTags(String name) {
-            return touristRepository.getTags(name);
+        public City getCityByName(String name) {
+            return touristRepository.getCityByName(name);
         }
 
-        public List<String> getCities() {
-            return touristRepository.myCities();
+        public List<Tag> getAllTags() {
+            return touristRepository.getAllTags();
         }
+        public List<Tag> getTagsForAttraction(int attractionId) {
+            return touristRepository.getTagsForAttraction(attractionId);
+        }
+
 }

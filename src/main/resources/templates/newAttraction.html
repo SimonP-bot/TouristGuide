@@ -24,24 +24,23 @@
 
 <!-- Byer i drop-down menu-->
     <label for="city">By:</label>
-    <select id="city" name="city" th:field="*{city}">
-        <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
-    </select>
+    <select id="city" name="city.id" th:field="*{city.id}">
+        <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
     <br><br>
 
 <!-- Vælg mellem flere tags-->
-    <label>Vælg Tags:</label>
-    <br>
-    <th:block th:each="tag : ${tags}">
-        <label>
-            <input type="checkbox" th:name="tags" th:value="${tag}" th:text="${tag.displayName}">
-        </label>
-    </th:block>
+        <label>Vælg Tags:</label>
+        <th:block th:each="tag : ${tags}">
+            <label>
+                <input type="checkbox" th:name="tags" th:value="${tag.id}" th:checked="${attraction.tags != null and attraction.tags.contains(tag)}">
+                <span th:text="${tag.name}"></span>
+            </label>
+        </th:block>
     <br><br>
 
     <button type="submit">OK</button>
-
 </form>
+
 <a th:href="@{/attractions}" class="delete-button">Annuller</a>
 </body>
 </html>

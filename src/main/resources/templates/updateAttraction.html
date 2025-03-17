@@ -8,28 +8,32 @@
 </head>
 <body>
 <form th:action="@{/attractions/update}" th:object="${attraction}" method="post">
-    <input type="hidden" th:field="*{name}">
+    <input type="hidden" th:field="*{id}">
 
-    <h2 th:text="'Opdater ' + ${name}"></h2>
+    <h2 th:text="'Opdater ' + ${attraction.name}"></h2>
     <br>
+
+    <label for="name">Navn:</label>
+    <input type="text" id="name" name="name" th:field="*{name}" required>
+    <br><br>
 
     <label for="description">Beskrivelse</label>
     <textarea name="description" id="description" cols="30" rows="5" th:field="*{description}" required></textarea>
     <br><br>
 
-    <label for="city">By</label>
-    <select name="city" id="city" th:field="*{city}">
-        <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+    <label for="city">By:</label>
+    <select id="city" name="city.id" th:field="*{city.id}">
+        <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
     </select>
     <br><br>
 
     <label>Tags</label><br>
-    <div th:each="tag : ${tags}">
+    <th:block th:each="tag : ${tags}">
         <label>
-            <input type="checkbox" th:value="${tag}" th:field="*{tags}">
+            <input type="checkbox" th:name="tags" th:value="${tag.id}" th:checked="${attraction.tags.contains(tag)}">
+            <span th:text="${tag.name}"></span>
         </label>
-        <label th:text="${tag.displayName}"></label><br>
-    </div>
+    </th:block>
     <br>
 
     <button type="submit">Opdater Attraktion</button>
