@@ -12,6 +12,8 @@ import java.util.List;
 public class TouristService {
         private final TouristRepository touristRepository;
 
+
+
         public TouristService(TouristRepository touristRepository) {
             this.touristRepository = touristRepository;
         }
@@ -29,11 +31,8 @@ public class TouristService {
 
     }
 
-        public void updateAttraction(TouristAttraction attraction, List<Integer> tagIds) {
+        public void updateAttraction(TouristAttraction attraction) {
             touristRepository.updateAttraction(attraction);
-            if (tagIds != null) {
-            touristRepository.updateAttractionTags(attraction.getId(), tagIds);
-            }
         }
 
         public boolean deleteAttraction(int attractionId) {
@@ -44,8 +43,13 @@ public class TouristService {
             return touristRepository.getCities();
         }
 
-        public City getCityByName(String name) {
-            return touristRepository.getCityByName(name);
+        public Tag findTagById(int id){
+            return touristRepository.findTagById(id);
+        }
+
+
+        public City getCityById(int id) {
+            return touristRepository.getCityById(id);
         }
 
         public List<Tag> getAllTags() {

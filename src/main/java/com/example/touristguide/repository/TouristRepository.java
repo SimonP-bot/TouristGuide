@@ -1,16 +1,15 @@
 package com.example.touristguide.repository;
 
 import com.example.touristguide.model.*;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.metrics.StartupStep;
+import com.example.touristguide.rowMapper.CityRowMapper;
+import com.example.touristguide.rowMapper.TagRowMapper;
+import com.example.touristguide.rowMapper.TouristAttractionRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Repository
@@ -52,7 +51,7 @@ public class TouristRepository {
             return ps;
         }, keyHolder);
         attraction.setId(keyHolder.getKey().intValue());
-        String sqlTags = "Insert into attraction_tag (AtttractionID,TagID) VALUES (?,?)";
+        String sqlTags = "INSERT INTO attraction_tag (AttractionID,TagID) VALUES (?,?)";
 
         for (Tag tag : attraction.getTags()){
             jdbcTemplate.update(sqlTags,attraction.getId(),tag.getId());
@@ -64,6 +63,13 @@ public class TouristRepository {
 
     // opdater en attraktion
     public void updateAttraction(TouristAttraction attraction) {
+        String deleteOldTags = "DELETE * FROM Attraction_Tag WHERE attractionId = ?";
+        jdbcTemplate.update(deleteOldTags,attraction.getId());
+        String createNewTags = "insert into Attraction_Tag (AttractionID,TagID) VALUES (?,?)";
+
+        for (Tag tag: attraction.getTags()){
+            jdbcTemplate.update(createNewTags,attraction.getId(),tag.getId());
+        }
         String sql = "UPDATE attraction SET Name = ?, Description = ?, CityID = ? WHERE AttractionID = ?";
         jdbcTemplate.update(sql, attraction.getName(), attraction.getDescription(), attraction.getCity().getId(), attraction.getId());
     }
@@ -80,12 +86,13 @@ public class TouristRepository {
         return jdbcTemplate.query(sql, new CityRowMapper());
     }
 
-    // hent by med navn
-    public City getCityByName(String name) {
-        String sql = "SELECT * FROM cities WHERE Name = ?";
-        List<City> cities = jdbcTemplate.query(sql, new CityRowMapper(), name);
+    // hent by med id
+    public City getCityById(int cityId) {
+        System.out.println("tisselort" + cityId);
+        String sql = "SELECT * FROM cities WHERE CityID = ?";
+        List<City> cities = jdbcTemplate.query(sql, new CityRowMapper(), cityId);
         if (cities.isEmpty()) {
-            return null;
+            throw new RuntimeException("ROTTELORT");
         } else {
             return cities.get(0);
         }
@@ -98,17 +105,17 @@ public class TouristRepository {
 
 
     public void addTagsToAttraction(TouristAttraction attraction) {
-        for (int tagId : tagIds) {
+        for (Tag tag : attraction.getTags()) {
             String sql = "INSERT INTO Attraction_Tag (AttractionID, TagID) VALUES (?, ?)";
-            jdbcTemplate.update(sql, attractionId, tagId);
+            jdbcTemplate.update(sql, attraction.getId(), tag.getId());
         }
     }
-
-    public void updateAttractionTags(int attractionId, List<Integer> tagIds) {
-        String sql = "DELETE FROM Attraction_Tag WHERE AttractionID = ?";
-        jdbcTemplate.update(sql, attractionId);
-        addTagsToAttraction(attractionId, tagIds);
-    }
+//
+//    public void updateAttractionTags(int attractionId, List<Integer> tagIds) {
+//        String sql = "DELETE FROM Attraction_Tag WHERE AttractionID = ?";
+//        jdbcTemplate.update(sql, attractionId);
+//        addTagsToAttraction(attractionId, tagIds);
+//    }
     // hent tags for en attraktion
     public List<Tag> getTagsForAttraction(int attractionId) {
         String sql = "SELECT * " +
@@ -116,5 +123,15 @@ public class TouristRepository {
                 "JOIN Attraction_Tag ON tags.TagID = Attraction_Tag.TagID " +
                 "WHERE Attraction_Tag.AttractionID = ?";
         return jdbcTemplate.query(sql, new TagRowMapper(), attractionId);
+    }
+
+    public Tag findTagById(int id){
+        String sql = "SELECT * from tags where TagID = ?";
+        List<Tag> tag = jdbcTemplate.query(sql,new TagRowMapper(),id);
+        if (tag.isEmpty()){
+            return null;
+        }else {
+            return tag.get(0);
+        }
     }
 }

@@ -23,16 +23,16 @@
     <br><br>
 
 <!-- Byer i drop-down menu-->
-    <label for="city">By:</label>
-    <select id="city" name="city.id" th:field="*{city.id}">
-        <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+    <label for="cityId">By:</label>
+    <select id="cityId" name="cityId" th:field="*{cityId}">
+        <option th:each="city : ${cities}" th:value="${city.getId()}" th:text="${city.name}"></option>
     <br><br>
 
 <!-- Vælg mellem flere tags-->
         <label>Vælg Tags:</label>
         <th:block th:each="tag : ${tags}">
             <label>
-                <input type="checkbox" th:name="tags" th:value="${tag.id}" th:checked="${attraction.tags != null and attraction.tags.contains(tag)}">
+                <input type="checkbox" th:name="tagIds" th:value="${tag.getId()}">
                 <span th:text="${tag.name}"></span>
             </label>
         </th:block>

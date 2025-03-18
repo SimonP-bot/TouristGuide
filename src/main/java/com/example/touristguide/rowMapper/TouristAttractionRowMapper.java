@@ -1,5 +1,7 @@
-package com.example.touristguide.model;
+package com.example.touristguide.rowMapper;
 
+import com.example.touristguide.model.City;
+import com.example.touristguide.model.TouristAttraction;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

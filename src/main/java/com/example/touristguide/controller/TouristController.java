@@ -1,5 +1,7 @@
 package com.example.touristguide.controller;
 
+import com.example.touristguide.dto.TouristAttractionDTO;
+import com.example.touristguide.model.City;
 import com.example.touristguide.model.Tag;
 import com.example.touristguide.model.TouristAttraction;
 import com.example.touristguide.service.TouristService;
@@ -41,7 +43,7 @@ public class TouristController {
 
     @GetMapping("/attractions/add") //Bruges til at vise html-side - ikke sende data
     public String addAttraction(Model model) {
-        model.addAttribute("attraction", new TouristAttraction());
+        model.addAttribute("attraction", new TouristAttractionDTO());
         model.addAttribute("cities", touristService.getCities());
         model.addAttribute("tags", touristService.getAllTags());
         return "newAttraction";
@@ -50,8 +52,24 @@ public class TouristController {
     @PostMapping("/attractions/save")
     public String saveAttraction(@ModelAttribute TouristAttractionDTO attractionDTO) {
         TouristAttraction touristAttraction = new TouristAttraction();
-        touristAttraction.setName(attractionDTO.get);
-        touristService.addAttraction(attraction);
+        touristAttraction.setName(attractionDTO.getName());
+        touristAttraction.setDescription(attractionDTO.getDescription());
+        touristAttraction.setId(attractionDTO.getId());
+        City city = touristService.getCityById(attractionDTO.getCityId());
+        touristAttraction.setCity(city);
+
+        List<Tag> tagList = new ArrayList<>();
+if (attractionDTO.getTagIds()!=null){
+    for (int tag : attractionDTO.getTagIds()){
+        tagList.add(touristService.findTagById(tag));
+    }
+}
+
+
+        touristAttraction.setTags(tagList);
+
+
+        touristService.addAttraction(touristAttraction);
         return "redirect:/attractions";
     }
 
@@ -68,8 +86,21 @@ public class TouristController {
     }
 
     @PostMapping("/attractions/update")
-    public String updateAttraction(@ModelAttribute TouristAttraction attraction, @RequestParam(value = "tags", required = false) List<Integer> tagIds) {
-        touristService.updateAttraction(attraction, tagIds);
+    public String updateAttraction(@ModelAttribute TouristAttractionDTO attractionDTO) {
+        TouristAttraction touristAttraction = new TouristAttraction();
+        touristAttraction.setName(attractionDTO.getName());
+        touristAttraction.setDescription(attractionDTO.getDescription());
+        touristAttraction.setId(attractionDTO.getId());
+        touristAttraction.setCity(touristService.getCityById(attractionDTO.getCityId()));
+
+        List<Tag> tagList = new ArrayList<>();
+
+        for (int tag : attractionDTO.getTagIds()){
+            tagList.add(touristService.findTagById(tag));
+        }
+
+        touristAttraction.setTags(tagList);
+        touristService.updateAttraction(touristAttraction);
         return "redirect:/attractions";
     }
 

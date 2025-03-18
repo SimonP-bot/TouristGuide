@@ -1,5 +1,6 @@
-package com.example.touristguide.model;
+package com.example.touristguide.rowMapper;
 
+import com.example.touristguide.model.Tag;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
