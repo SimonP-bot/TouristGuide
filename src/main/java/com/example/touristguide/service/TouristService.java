@@ -24,11 +24,9 @@ public class TouristService {
             return touristRepository.getAttractionByName(name);
         }
 
-    public void addAttraction(TouristAttraction attraction, List<Integer> tagIds) {
-        touristRepository.addAttraction(attraction);
-        if (tagIds != null && !tagIds.isEmpty()) {
-            touristRepository.addTagsToAttraction(attraction.getId(), tagIds);
-        }
+    public void addAttraction(TouristAttraction attraction) {
+            touristRepository.addAttraction(attraction);
+
     }
 
         public void updateAttraction(TouristAttraction attraction, List<Integer> tagIds) {

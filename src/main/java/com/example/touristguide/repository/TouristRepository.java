@@ -51,8 +51,15 @@ public class TouristRepository {
             ps.setInt(3, attraction.getCity().getId());
             return ps;
         }, keyHolder);
-
         attraction.setId(keyHolder.getKey().intValue());
+        String sqlTags = "Insert into attraction_tag (AtttractionID,TagID) VALUES (?,?)";
+
+        for (Tag tag : attraction.getTags()){
+            jdbcTemplate.update(sqlTags,attraction.getId(),tag.getId());
+        }
+
+
+
     }
 
     // opdater en attraktion
@@ -89,7 +96,8 @@ public class TouristRepository {
         return jdbcTemplate.query(sql, new TagRowMapper());
     }
 
-    public void addTagsToAttraction(int attractionId, List<Integer> tagIds) {
+
+    public void addTagsToAttraction(TouristAttraction attraction) {
         for (int tagId : tagIds) {
             String sql = "INSERT INTO Attraction_Tag (AttractionID, TagID) VALUES (?, ?)";
             jdbcTemplate.update(sql, attractionId, tagId);

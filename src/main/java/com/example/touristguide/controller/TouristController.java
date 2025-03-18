@@ -48,8 +48,10 @@ public class TouristController {
     }
 
     @PostMapping("/attractions/save")
-    public String saveAttraction(@ModelAttribute TouristAttraction attraction, @RequestParam(value = "tags", required = false) List<Integer> tagIds) {
-        touristService.addAttraction(attraction, tagIds != null ? tagIds : new ArrayList<>());
+    public String saveAttraction(@ModelAttribute TouristAttractionDTO attractionDTO) {
+        TouristAttraction touristAttraction = new TouristAttraction();
+        touristAttraction.setName(attractionDTO.get);
+        touristService.addAttraction(attraction);
         return "redirect:/attractions";
     }
 
