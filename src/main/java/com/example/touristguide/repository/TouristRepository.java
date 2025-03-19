@@ -17,17 +17,10 @@ import java.util.List;
 
 @Repository
 public class TouristRepository {
-    @Value("${spring.datasource.url}")
-    private String dbUrl;
-    @Value("${spring.datasource.username}")
-    private String username;
-    @Value("${spring.datasource.password}")
-    private String password;
-    private final DataSource dataSource = new DriverManagerDataSource(dbUrl,username,password);
     private final JdbcTemplate jdbcTemplate;
 
     public TouristRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     // hent alle attraktioner
