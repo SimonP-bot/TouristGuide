@@ -75,9 +75,14 @@ public class TouristRepository {
     }
 
     // slet en attraktion
-    public boolean deleteAttraction(int attractionId) {
-        String sql = "DELETE FROM attraction WHERE AttractionID = ?";
-        return jdbcTemplate.update(sql, attractionId) > 0;
+    public boolean deleteAttraction(String name) {
+        String sql1 = "DELETE attraction_tag FROM attraction_tag JOIN attraction ON attraction_tag.AttractionID = attraction.AttractionID WHERE attraction.name = ?";
+        jdbcTemplate.update(sql1, name);
+
+        String sql2 = "DELETE FROM attraction WHERE name = ?";
+        int rowsAffected = jdbcTemplate.update(sql2, name);
+
+        return rowsAffected > 0;
     }
 
     // hent alle byer

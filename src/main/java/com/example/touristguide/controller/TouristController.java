@@ -59,23 +59,19 @@ public class TouristController {
         touristAttraction.setCity(city);
 
         List<Tag> tagList = new ArrayList<>();
-if (attractionDTO.getTagIds()!=null){
-    for (int tag : attractionDTO.getTagIds()){
-        tagList.add(touristService.findTagById(tag));
-    }
-}
-
-
-        touristAttraction.setTags(tagList);
-
-
-        touristService.addAttraction(touristAttraction);
+            if (attractionDTO.getTagIds()!=null){
+                for (int tag : attractionDTO.getTagIds()){
+                    tagList.add(touristService.findTagById(tag));
+                }
+            }
+            touristAttraction.setTags(tagList);
+            touristService.addAttraction(touristAttraction);
         return "redirect:/attractions";
     }
 
-    @GetMapping("/attractions/{id}/edit")
-    public String editAttraction(Model model, @PathVariable int id) {
-        TouristAttraction attraction = touristService.getAttractionByName(String.valueOf(id));
+    @GetMapping("/attractions/{name}/edit")
+    public String editAttraction(Model model, @PathVariable String name) {
+        TouristAttraction attraction = touristService.getAttractionByName(name);
         if (attraction == null) {
             throw new IllegalArgumentException("Ugyldig attraktion");
         }
@@ -104,9 +100,9 @@ if (attractionDTO.getTagIds()!=null){
         return "redirect:/attractions";
     }
 
-    @PostMapping("/attractions/delete/{id}")
-    public String deleteAttraction(@PathVariable int id) {
-        touristService.deleteAttraction(id);
+    @PostMapping("/attractions/delete/{name}")
+    public String deleteAttraction(@PathVariable String name) {
+        touristService.deleteAttraction(name);
         return "redirect:/attractions";
     }
 

@@ -30,7 +30,7 @@
     <label>Tags</label><br>
     <th:block th:each="tag : ${tags}">
         <label>
-            <input type="checkbox" th:name="tags" th:value="${tag.id}" th:checked="${attraction.tags.contains(tag)}">
+            <input type="checkbox" th:name="tags" th:value="${tag.getId()}" th:checked="${not #lists.isEmpty(attraction.tagIds) and #lists.contains(attraction.tagIds, tag.getId())}">
             <span th:text="${tag.name}"></span>
         </label>
     </th:block>
