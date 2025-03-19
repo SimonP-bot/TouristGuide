@@ -4,20 +4,30 @@ import com.example.touristguide.model.*;
 import com.example.touristguide.rowMapper.CityRowMapper;
 import com.example.touristguide.rowMapper.TagRowMapper;
 import com.example.touristguide.rowMapper.TouristAttractionRowMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
 public class TouristRepository {
+    @Value("${spring.datasource.url}")
+    private String dbUrl;
+    @Value("${spring.datasource.username}")
+    private String username;
+    @Value("${spring.datasource.password}")
+    private String password;
+    private final DataSource dataSource = new DriverManagerDataSource(dbUrl,username,password);
     private final JdbcTemplate jdbcTemplate;
 
     public TouristRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     // hent alle attraktioner
