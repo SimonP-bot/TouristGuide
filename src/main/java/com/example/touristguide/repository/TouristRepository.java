@@ -56,9 +56,6 @@ public class TouristRepository {
         for (Tag tag : attraction.getTags()){
             jdbcTemplate.update(sqlTags,attraction.getId(),tag.getId());
         }
-
-
-
     }
 
     // opdater en attraktion
@@ -108,19 +105,6 @@ public class TouristRepository {
         return jdbcTemplate.query(sql, new TagRowMapper());
     }
 
-
-    public void addTagsToAttraction(TouristAttraction attraction) {
-        for (Tag tag : attraction.getTags()) {
-            String sql = "INSERT INTO Attraction_Tag (AttractionID, TagID) VALUES (?, ?)";
-            jdbcTemplate.update(sql, attraction.getId(), tag.getId());
-        }
-    }
-//
-//    public void updateAttractionTags(int attractionId, List<Integer> tagIds) {
-//        String sql = "DELETE FROM Attraction_Tag WHERE AttractionID = ?";
-//        jdbcTemplate.update(sql, attractionId);
-//        addTagsToAttraction(attractionId, tagIds);
-//    }
     // hent tags for en attraktion
     public List<Tag> getTagsForAttraction(int attractionId) {
         String sql = "SELECT * " +
