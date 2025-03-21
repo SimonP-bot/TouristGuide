@@ -24,10 +24,10 @@ public class TouristService {
             return touristRepository.getAttractionByName(name);
         }
 
-    public void addAttraction(TouristAttraction attraction) {
+        public void addAttraction(TouristAttraction attraction) {
             touristRepository.addAttraction(attraction);
 
-    }
+        }
 
         public void updateAttraction(TouristAttraction attraction) {
             touristRepository.updateAttraction(attraction);
@@ -44,7 +44,6 @@ public class TouristService {
         public Tag findTagById(int id){
             return touristRepository.findTagById(id);
         }
-
 
         public City getCityById(int id) {
             return touristRepository.getCityById(id);
