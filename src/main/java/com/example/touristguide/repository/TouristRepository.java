@@ -93,7 +93,7 @@ public class TouristRepository {
 
     // hent by med id
     public City getCityById(int cityId) {
-        System.out.println("tisselort" + cityId);
+        System.out.println(cityId);
         String sql = "SELECT * FROM cities WHERE CityID = ?";
         List<City> cities = jdbcTemplate.query(sql, new CityRowMapper(), cityId);
         if (cities.isEmpty()) {
